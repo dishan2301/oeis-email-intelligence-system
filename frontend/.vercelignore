@@ -1,0 +1,13 @@
+.env
+.env.*
+!.env.public
+public/demo-data.json
+node_modules
+dist
+*.log
+*.pem
+*.key
+*.pfx
+*.p12
+Dockerfile
+nginx*.conf

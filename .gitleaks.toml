@@ -1,0 +1,12 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Local runtime and generated dependencies are never release inputs"
+paths = [
+  '''(^|/)\.env($|\.)''',
+  '''(^|/)\.venv/''',
+  '''(^|/)node_modules/''',
+  '''(^|/)dist/''',
+  '''(^|/)[^/]+\.(db|sqlite|sqlite3)$''',
+]

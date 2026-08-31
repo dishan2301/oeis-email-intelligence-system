@@ -1,0 +1,545 @@
+/* OEIS editorial operations language: fewer floating cards, stronger rules, honest density. */
+body {
+  background: #edf2f7;
+}
+.desktop-nav {
+  padding: 10px;
+  width: 278px;
+  flex-basis: 278px;
+}
+.side {
+  width: 258px;
+  top: 10px;
+  height: calc(100vh - 20px);
+  min-height: calc(100vh - 20px);
+  border-radius: 12px;
+  background: linear-gradient(180deg, #0b2b45, #061c2f);
+  box-shadow: 8px 0 32px rgba(7, 28, 47, 0.14);
+}
+.brand {
+  padding: 6px 8px 18px;
+  border-bottom: 1px solid rgba(174, 202, 224, 0.14);
+}
+.side .oeis-logo.compact b {
+  color: #fff;
+}
+.side .oeis-logo.compact small {
+  color: #7594aa;
+}
+.side .oeis-logo.compact svg {
+  width: 40px;
+  height: 40px;
+}
+.side .MuiButton-root {
+  border-radius: 7px;
+}
+.side .active,
+.side .active:hover {
+  border-color: rgba(151, 190, 255, 0.28);
+  background: #173f62;
+  box-shadow: inset 3px 0 #72a5ff;
+}
+.system {
+  border-radius: 8px;
+  background: #071f34;
+}
+.workspace {
+  padding-right: 10px;
+}
+.top {
+  height: 64px;
+  top: 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  background: #fff;
+  backdrop-filter: none;
+  box-shadow: 0 4px 14px rgba(25, 54, 84, 0.045);
+}
+.main {
+  padding: 26px 26px 44px;
+}
+.hero {
+  min-height: 100px;
+  margin-bottom: 18px;
+  padding: 18px 0;
+  border: 0;
+  border-bottom: 1px solid #cfdbe6;
+  border-radius: 0;
+  background: transparent;
+  overflow: visible;
+}
+.hero:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 64px;
+  height: 3px;
+  background: #2f6fed;
+}
+.hero:after {
+  right: 0;
+  top: auto;
+  bottom: 17px;
+  width: 132px;
+  height: 1px;
+  border-radius: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    #a9bdcf 0 1px,
+    transparent 1px 6px
+  );
+  opacity: 0.65;
+}
+.hero h1 {
+  font-size: 36px;
+}
+.hero p {
+  font-size: 13px;
+}
+.executive-strip {
+  min-height: 76px;
+  padding: 16px 18px;
+  border-width: 1px 1px 1px 4px;
+  border-radius: 8px;
+  background: #fff !important;
+  box-shadow: none;
+}
+.executive-strip.readiness-error {
+  border-color: #d14343 #dce4ec #dce4ec #d14343;
+  background: #fff1f2 !important;
+  color: #7f1d1d;
+}
+.executive-strip.readiness-warning {
+  border-color: #d97706 #dce4ec #dce4ec #d97706;
+}
+.posture-copy b {
+  font-size: 15px;
+}
+.posture-status {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: right;
+}
+.posture-status small {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+}
+.metric-ledger {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  overflow: hidden;
+}
+.metric-cell {
+  position: relative;
+  min-width: 0;
+  padding: 17px 15px;
+  border-right: 1px solid #dce5ed;
+  background: #fff;
+}
+.metric-cell:last-child {
+  border-right: 0;
+}
+.metric-cell > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+}
+.metric-cell span {
+  color: #5c7083;
+  font-size: 9px;
+  font-weight: 750;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.045em;
+}
+.metric-cell i {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: #4b86ef;
+}
+.metric-cell strong {
+  display: block;
+  margin: 16px 0 7px;
+  color: #102a43;
+  font-size: 29px;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+.metric-cell small {
+  display: block;
+  min-height: 27px;
+  color: #7a8b9b;
+  font-size: 9px;
+  line-height: 1.45;
+}
+.metric-2 i {
+  background: #e79a24;
+}
+.metric-3 i {
+  background: #d14343;
+}
+.metric-5 i {
+  background: #12866a;
+}
+.activation-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, 0.68fr);
+  gap: 12px;
+}
+.activation-brief,
+.automation-brief {
+  border-radius: 9px !important;
+  box-shadow: none !important;
+}
+.activation-brief {
+  padding: 26px;
+  border-top: 3px solid #2f6fed !important;
+}
+.brief-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.brief-head > div:first-child {
+  max-width: 620px;
+}
+.brief-head h5,
+.automation-brief h5 {
+  margin: 7px 0 8px;
+}
+.brief-head p,
+.automation-brief > p {
+  color: #5d7082;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.section-index {
+  color: #3d6fa9 !important;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace !important;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.14em !important;
+}
+.activation-score {
+  text-align: right;
+}
+.activation-score strong,
+.activation-score span {
+  display: block;
+}
+.activation-score strong {
+  color: #102a43;
+  font-size: 30px;
+  letter-spacing: -0.05em;
+}
+.activation-score span {
+  color: #728598;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.activation-brief > .MuiLinearProgress-root {
+  height: 3px;
+  margin: 21px 0 11px;
+  border-radius: 0;
+  background: #e6edf4;
+}
+.activation-list {
+  border-top: 1px solid #dce5ed;
+}
+.activation-row {
+  display: grid;
+  grid-template-columns: 34px 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 8px;
+  min-height: 58px;
+  border-bottom: 1px solid #e3eaf1;
+}
+.activation-row .step-number {
+  color: #8798a8;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 9px;
+}
+.activation-row svg {
+  font-size: 18px;
+  color: #8495a5;
+}
+.activation-row.complete svg {
+  color: #12866a;
+}
+.activation-row.blocked svg {
+  color: #d14343;
+}
+.activation-row b,
+.activation-row small {
+  display: block;
+}
+.activation-row b {
+  font-size: 11px;
+}
+.activation-row small {
+  margin-top: 3px;
+  color: #718394;
+  font-size: 9px;
+}
+.activation-row > span:last-child {
+  padding: 4px 7px;
+  border: 1px solid #dce5ed;
+  border-radius: 3px;
+  color: #627688;
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+.activation-row.complete > span:last-child {
+  border-color: #a8d8cb;
+  color: #08745a;
+}
+.activation-row.blocked > span:last-child {
+  border-color: #efb3b3;
+  color: #b42323;
+}
+.brief-actions {
+  display: flex;
+  gap: 9px;
+  margin-top: 20px;
+}
+.automation-brief {
+  position: relative;
+  padding: 26px;
+  border-color: #173b58 !important;
+  background: #09243a !important;
+  color: #fff;
+  overflow: hidden;
+}
+.automation-brief:after {
+  content: "";
+  position: absolute;
+  right: -45px;
+  top: -45px;
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(126, 170, 205, 0.2);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 28px rgba(126, 170, 205, 0.035),
+    0 0 0 56px rgba(126, 170, 205, 0.025);
+}
+.automation-mark {
+  position: relative;
+  z-index: 1;
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 40px;
+  border: 1px solid #31536d;
+  border-radius: 4px;
+  color: #7dacff;
+  background: #0c2b45;
+}
+.automation-brief .section-index {
+  color: #7dacff !important;
+}
+.automation-brief h5 {
+  color: #fff;
+}
+.automation-brief > p {
+  color: #9bb0c0;
+}
+.automation-list {
+  margin-top: 23px;
+  border-top: 1px solid #274760;
+}
+.automation-list > div {
+  display: flex;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid #1e405a;
+}
+.automation-list svg {
+  font-size: 17px;
+  color: #76a7f7;
+}
+.automation-list b,
+.automation-list small {
+  display: block;
+}
+.automation-list b {
+  color: #f7fbff;
+  font-size: 10px;
+}
+.automation-list small {
+  margin-top: 3px;
+  color: #8fa9bd;
+  font-size: 8px;
+  line-height: 1.4;
+}
+.live-charts {
+  gap: 12px;
+}
+.live-charts .MuiCard-root,
+.table-card {
+  border-radius: 9px;
+  box-shadow: none;
+}
+.live-charts .card-head {
+  border-bottom: 1px solid #e1e8ef;
+}
+.toolbar {
+  border-bottom: 1px solid #dae4ed;
+  background: #f5f8fb;
+}
+.setting-panel {
+  border-radius: 7px !important;
+}
+.settings-workspace {
+  background: #f7f9fb;
+}
+.preview {
+  border-radius: 7px;
+}
+.MuiDialog-paper {
+  border-radius: 10px !important;
+}
+.feature-empty.compact {
+  min-height: 220px;
+  padding: 34px;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 520px);
+  grid-template-rows: auto auto;
+  align-content: center;
+  justify-content: center;
+  column-gap: 16px;
+  row-gap: 5px;
+  text-align: left;
+  background: repeating-linear-gradient(
+    135deg,
+    #fff 0,
+    #fff 12px,
+    #fbfcfe 12px,
+    #fbfcfe 13px
+  );
+}
+.feature-empty.compact > svg {
+  grid-row: 1 / 3;
+  width: 42px;
+  height: 42px;
+  padding: 10px;
+  border: 1px solid #cad9e8;
+  border-radius: 6px;
+  color: #356fba;
+  background: #f4f8fc;
+}
+.feature-empty.compact > b {
+  color: #102a43;
+  font-size: 14px;
+  line-height: 1.35;
+}
+.feature-empty.compact > span {
+  color: #667b8f;
+  font-size: 11px;
+  line-height: 1.55;
+}
+@media (max-width: 1250px) {
+  .metric-ledger {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .metric-cell {
+    border-bottom: 1px solid #dce5ed;
+  }
+  .activation-layout {
+    grid-template-columns: 1fr 0.7fr;
+  }
+}
+@media (max-width: 900px) {
+  .desktop-nav {
+    display: none;
+  }
+  .workspace {
+    padding: 0;
+  }
+  .top {
+    top: 0;
+    margin: 0;
+    border-radius: 0;
+  }
+  .main {
+    padding: 20px 18px 38px;
+  }
+  .hero {
+    padding-top: 14px;
+  }
+  .activation-layout {
+    grid-template-columns: 1fr;
+  }
+  .automation-mark {
+    margin-bottom: 25px;
+  }
+}
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 30px;
+  }
+  .executive-strip {
+    align-items: flex-start;
+  }
+  .posture-status {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 7px;
+  }
+  .metric-ledger {
+    grid-template-columns: 1fr 1fr;
+  }
+  .metric-cell {
+    min-height: 125px;
+  }
+  .metric-cell:nth-child(even) {
+    border-right: 0;
+  }
+  .metric-cell strong {
+    font-size: 27px;
+  }
+  .brief-head {
+    gap: 12px;
+  }
+  .activation-score strong {
+    font-size: 25px;
+  }
+  .activation-brief,
+  .automation-brief {
+    padding: 20px;
+  }
+  .activation-row {
+    grid-template-columns: 27px 24px minmax(0, 1fr);
+  }
+  .activation-row > span:last-child {
+    display: none;
+  }
+  .brief-actions {
+    flex-direction: column;
+  }
+  .brief-actions .MuiButton-root {
+    width: 100%;
+  }
+  .feature-empty.compact {
+    min-height: 260px;
+    padding: 28px 22px;
+    grid-template-columns: 38px minmax(0, 1fr);
+  }
+  .feature-empty.compact > svg {
+    width: 38px;
+    height: 38px;
+  }
+}

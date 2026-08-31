@@ -1,0 +1,44 @@
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment: {ACCEPT_EULA: "Y", MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD}"}
+    volumes: [sql_data:/var/opt/mssql]
+    healthcheck: {test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P $$MSSQL_SA_PASSWORD -C -Q 'SELECT 1'"], interval: 10s, timeout: 5s, retries: 10}
+    restart: unless-stopped
+    mem_limit: 2g
+    pids_limit: 300
+  redis:
+    image: redis:7.4-alpine
+    command: ["sh","-c","exec redis-server --appendonly yes --requirepass \"$$REDIS_PASSWORD\""]
+    environment: {REDIS_PASSWORD: "${REDIS_PASSWORD}"}
+    volumes: [redis_data:/data]
+    healthcheck: {test: ["CMD-SHELL", "redis-cli -a \"$$REDIS_PASSWORD\" ping | grep PONG"], interval: 10s, timeout: 5s, retries: 10}
+    restart: unless-stopped
+    mem_limit: 512m
+    pids_limit: 100
+  backend:
+    build: ./backend
+    env_file: [.env, backend/.env]
+    depends_on: {sqlserver: {condition: service_healthy}, redis: {condition: service_healthy}}
+    expose: ["8000"]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    read_only: true
+    tmpfs: ["/tmp"]
+    restart: unless-stopped
+    mem_limit: 1g
+    cpus: 2
+    pids_limit: 200
+  frontend:
+    build: ./frontend
+    depends_on: [backend]
+    ports: ["8080:8080"]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: ["ALL"]
+    read_only: true
+    tmpfs: ["/tmp", "/var/cache/nginx", "/var/run"]
+    restart: unless-stopped
+    mem_limit: 256m
+    cpus: 1
+    pids_limit: 100
+volumes: {sql_data: {}, redis_data: {}}

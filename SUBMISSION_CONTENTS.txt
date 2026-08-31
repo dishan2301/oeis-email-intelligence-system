@@ -1,0 +1,4 @@
+OEIS curated CEO submission
+Created: 2026-07-13
+Start with FINAL_CEO_SUBMISSION_AUDIT.md and README.md.
+Excluded: credentials, recovery codes, tokens, real mailbox data, databases, logs, caches, node_modules, and build artifacts.
