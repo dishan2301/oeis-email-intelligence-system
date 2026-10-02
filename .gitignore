@@ -27,3 +27,5 @@ personal-demo.log
 *.pem
 *.key
 *recovery*code*
+.vercel
+.env*
