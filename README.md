@@ -68,3 +68,4 @@ The production UI provides repository-backed KPIs, server-filtered pending email
 ## Production and rollback
 
 Use HTTPS at Nginx/IIS/load balancer, managed SQL Server and Redis, a secret store, encrypted backups, centralized logs, signed digest-pinned container images, and MFA at the production identity layer. Set `SCHEDULER_ENABLED=true` on exactly one deployment and false on API replicas. Run migrations as a release job before traffic shifts. See `SECURITY_REMEDIATION_STATUS.md`; its manual gates are mandatory before release.
+# mail-mannager
